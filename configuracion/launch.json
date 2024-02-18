@@ -1,0 +1,18 @@
+{
+    "version": "0.1.0",
+    "configurations": [
+        {
+            "name": "odoo-16.0",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/odoo/odoo-bin",
+            "console": "integratedTerminal",
+            "args": [
+                "-c","${workspaceFolder}/odoo.conf",
+                "--addons-path", "${workspaceFolder}/odoo/addons, ${workspaceFolder}/odoo/odoo/addons, ${workspaceFolder}/custom-addons",
+                "-u","mymodule,open_academy,edificiope",
+                "-d","curso" 
+            ]
+        },
+    ],
+}
