@@ -1,0 +1,85 @@
+<odoo>
+    <record id="view_session_form" model="ir.ui.view" >
+        <field name="name">view.session.form</field>
+        <!--A que modelo HACE REFERENCIA-->
+        <field name="model">session</field>
+        <!--Para definir que es una Formulario-->
+        <field name="arch" type="xml">
+            <form>
+            <sheet>
+                <div class="oe_title">
+                        <h1>
+                            <field name="name" default_focus="1" class="text-break" placeholder="Nombre de Session"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="instructor_id"/>
+                            <field name="date_start"/>
+                            <field name="duration"/>
+                        </group>
+                        <group>
+                            <field name="course_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="attendee_ids"/>
+                        <!-- Tabla Normal <field name="attendee_ids"/> -->
+                        <!-- Con WidGet <field name="attendee_ids" widget="many2many_tags"/> -->
+                        <!--<field name="attendee_ids" widget="many2many_tags"/>-->
+                        <!--<field name="attendee_ids">
+                            <tree>
+                                <field name="name"/>
+                                <field name="email"/>
+                                <field name="mobile"/>
+                            </tree>
+                        </field>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+ 
+   <record id="view_session_tree" model="ir.ui.view">
+        <field name="name">view.session.tree</field>
+        <!--A que modelo HACE REFERENCIA-->
+        <field name="model">session</field>
+        <!--Para definir que es una Formulario-->
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="instructor_id"/>
+                <field name="date_start"/>
+                <field name="duration" optional="hide"/>
+                <field name="course_id"/>
+            </tree>
+        </field>
+    </record>
+ 
+    <record id="view_session_search" model="ir.ui.view" >
+        <field name="name">view.session.search</field>
+        <!--A que modelo HACE REFERENCIA-->
+        <field name="model">session</field>
+        <!--Para definir que es una Formulario-->
+        <field name="arch" type="xml">
+            <search>
+                <field name="instructor_id"/>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+ 
+    <record id="session_action" model="ir.actions.act_window">
+        <field name="name">Session</field>
+        <field name="res_model">session</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+ 
+    <menuitem
+        id="session_menu"
+        name="Session"
+        action="session_action"
+        parent="open_academy_main_menu"
+        sequence="11"/>
+ 
+</odoo>

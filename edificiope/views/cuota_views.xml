@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="couta_form_view" model="ir.ui.view"><!--formulario-->
+        <field name="name">cuota.form.view</field>
+        <field name="model">cuota</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class='oe_title mb24'>
+                        <h1>
+                            <field name="name" default_focus="1" placeholder="Numero Couta"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>    
+                            <field name="partnerbuilding_id"/>
+                            <field name="date_start"/>    
+                             <field name="amount"/>            
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_cuota_tree" model="ir.ui.view">
+        <field name="name">view.cuota.tree</field>
+        <!--A que modelo HACE REFERENCIA-->
+        <field name="model">cuota</field>
+        <!--Para definir que es una Formulario-->
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="partnerbuilding_id"/>
+                <field name="date_start" />
+                <field name="amount"/>
+            </tree>
+        </field>
+    </record>
+
+       <record id="cuota_view_search" model="ir.ui.view">
+        <field name="name">cuota.view.search</field>
+        <field name="model">cuota</field>
+        <field name="arch" type="xml">
+            <search string="Cuotas">
+                <field name="name" />
+                <field name="partnerbuilding_id" />
+            </search>
+        </field>
+    </record>
+    
+     <record id="action_show_cuota" model="ir.actions.act_window"><!--acción de ventana wi-->
+        <field name="name">Cuotas</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cuota</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+  <menuitem 
+        id="edificiope_main_menu"
+        name="Edificio PE"
+        sequence="98"/> 
+
+         <menuitem
+        action="action_show_cuota"
+        id="menu_cuotas"
+        parent="edificiope_main_menu"
+        name="Cuotas"
+        sequence="2"/>
+
+</odoo>

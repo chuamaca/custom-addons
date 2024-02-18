@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_partner_view_tree" model="ir.ui.view">
+        <field name="name">res.partner.view.tree</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <!--<field name="is_company" position="before">posision de vistas heredadas (antes de is_company)
+                <field name="is_instructor" optional="hide"/>
+            </field>-->
+            <!--<tree string="instructor">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="mobile"/>
+                <field name="is_instructor"/>
+            </tree>-->
+            <xpath expr="//field[@name='is_company']" position="before"><!-- before, after, inside-->
+                <field name="is_instructor" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+    
+    <record id="res_partner_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!--otra forma de heredar posision de vistas, pero para div (class)-->
+            <!--<xpath expr="//span[@name='address_name']" position="before">
+                <field name="is_instructor"/>
+            </xpath>-->
+            <xpath expr="//notebook" position="inside">
+                <page string="Open Academy" name="open_academy">
+                    <label for="is_instructor" string="Instructor?"/>
+                    <field name="is_instructor" widget="boolean_toggle"/>
+                </page>
+            </xpath>
+            <!--<field name="function" position="before">
+                <field name="is_instructor" widget="boolean_toggle"/>
+                <field name="is_instructor"/>
+            </field>-->
+            <xpath expr="//field[@name='company_type']" position="attributes">
+                <!--<attribute name="invisible">1</attribute>-->
+                <!-- invisible, readonly, required -->
+                <attribute name="attrs">{'invisible':[('is_instructor','=',True)]}</attribute>
+            </xpath>
+            <!--<xpath expr="//field[@name='mobile']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>-->
+        </field>
+    </record>
+
+    <record id="res_partner_view_search_inherit" model="ir.ui.view">
+        <field name="name">res.partner.view.search.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <separator/>
+                <filter string="Instructor" name="is_instructor" domain="['|',('is_instructor', '=', True),('is_company','=',False)]"/>
+                <!-- domain: Filtro, es una lista de tuplas. [('is_instructor', '=', True)] -->
+                <!-- Revisar notación polaca inversa para dominios '|': OR '&': AND--> 
+            </xpath>
+        </field>
+    </record>
+    
+    <!--vista de una persona con el boleno instructor -->
+
+    <record id="instructor_view_tree" model="ir.ui.view">
+        <field name="name">instructor.view.tree</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree string="list">
+                <field name="name" />
+                <field name="mobile" />
+                <field name="email" />
+                <field name="is_instructor" />
+            </tree>
+        </field>
+    </record>
+
+    <!--acción de ventana para llamar a una vista expecífica-->
+    <record id="action_show_instructor" model="ir.actions.act_window">
+        <field name="name">Instructor</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="open_academy.instructor_view_tree" />
+        <!-- search_default_ Permite establecer un filtro por defecto al mostrar los registros-->
+        <field name="context">{'search_default_is_instructor': 1, 'default_is_instructor': True, 'default_is_company': False}</field>
+        <field name="domain">[('is_company', '=', False)]</field>
+    </record>
+
+    <menuitem
+        id="instructor_menu"
+        name="Instructor"
+        action="action_show_instructor"
+        parent="open_academy_main_menu"
+        sequence="30"/>
+</odoo>
