@@ -1,0 +1,54 @@
+<odoo>
+    <record id="course_form_view" model="ir.ui.view"><!--formulario-->
+        <field name="name">course.form.view</field>
+        <field name="model">course</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class='oe_title mb24'>
+                        <h1>
+                            <field name="name" default_focus="1" placeholder="Course name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>    
+                            <field name="description"/>
+                            <field name="responsible_id"/>            
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="course_view_search" model="ir.ui.view">
+        <field name="name">course.view.search</field>
+        <field name="model">course</field>
+        <field name="arch" type="xml">
+            <search string="course">
+                <field name="name" />
+                <field name="responsible_id" />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_show_course" model="ir.actions.act_window"><!--acción de ventana wi-->
+        <field name="name">Courses</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">course</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+        <!-- show ventana-->
+    <menuitem 
+        id="open_academy_main_menu"
+        name="Open Academy"
+        sequence="99"/> 
+
+    <menuitem
+        action="action_show_course"
+        id="menu_courses"
+        parent="open_academy_main_menu"
+        name="Courses"
+        sequence="1"/>
+
+</odoo>
