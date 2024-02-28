@@ -11,6 +11,8 @@ class cuota(models.Model):
     #amount = fields.Monetary(string='Amount')
     amount = fields.Float(digits=(2, 2))
 
+    scheduledfee_id=fields.Many2one(comodel_name='scheduledfee',string='Cuota Programada')
+
 
     def set_default_is_cero(self):
         return 0

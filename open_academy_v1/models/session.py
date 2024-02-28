@@ -11,17 +11,12 @@ class Session(models.Model):
     #date_start = fields.Datetime(required=True) # valor por defecto, en caso de no usar el string del campo: Date Start
     duration = fields.Float(string='Duration')
     course_id = fields.Many2one(comodel_name='course', string='Course')
-    active = fields.Boolean()
-    
-    #Campo Relacional
-    #Primera forma- Reducida
-    attendee_ids=fields.Many2many('res.partner', string ="Session attendees")
-    
-    #Para realizar una relacion de muchos a muchos y hacer relacion a la misma tabla mas de 1 vez
-    #Fuerzas la tabla con el nombre de la tabla Origen_destino_rel
-    #instructor_ids=fields.Many2Many('res.partner','session_instructor_rel','session_id','instructor_id', string ="Session instructors")
+    active = fields.Boolean('Active', default=True)
 
- 
+    #Definir un campo de relacion muchos a muchos: Many2many
 
+    attendee_ids = fields.Many2many('res.partner', 'session_res_partner_rel', 'session_id', 'res_partner_id', string='Session attendees')
+
+    #instructor_ids = fields.Many2many('res.partner', 'session_instructor_rel', 'session_id', 'instructor_id', string='Session instructors')
 
 

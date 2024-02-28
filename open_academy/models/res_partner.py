@@ -1,9 +1,12 @@
-from odoo import fields, models
+from odoo import models,fields
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
-
-    def set_default_is_instructor(self):
-        return False
+    _inherit='res.partner'
     
-    is_instructor = fields.Boolean(string="Is Instructor?", default=set_default_is_instructor)
+    
+    def setDefaultIsInstructor(selft):
+        return False
+    #Alternativas de definir un default
+    #is_instructor= fields.Boolean(string="Is Instructor?" default=false)
+    #is_instructor= fields.Boolean(string="Is Instructor?" ,default=setDefaultIsInstructor)
+    is_instructor= fields.Boolean(string="Is Instructor?", default=lambda selft:False)

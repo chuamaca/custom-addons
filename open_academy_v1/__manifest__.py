@@ -8,18 +8,16 @@
     'summary': 'Module for learn Odoo and Python',
     'depends': [
         'base',
+        'contacts',
+        'purchase'
     ],
     'description': "",
     'data': [
-        # Aqui van las rutas de las vistas del modulo, tambien la configuracion de Securidad
-        #seguridad Course
-        "security/ir.model.access.csv",
-        #"data/data.xml"
-        #Si importa el orden o secuencia de declarcion de las Vistas
+        # Aqui van las rutas de las vistas del modulo
         "views/course_views.xml",
         "views/session_views.xml",
-        #Declaramos la vista heredada
-        "views/res_partner_view.xml"
+        "views/res_partner_views.xml",
+        "security/ir.model.access.csv",
     ],
     'qweb': [
         # Aqui van las rutas de las vistas qweb

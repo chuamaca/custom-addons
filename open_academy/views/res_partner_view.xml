@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- El id y el Name se ponen de manera arbitraria -->
+    <record id="view_res_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <!-- una forma de ubicar el campo nuevo modificado -->
+            <!-- <field name="function" position="before"> -->
+                <!-- <field name="is_instructor"/> -->
+                <!-- =====>>>> Cuando queremos que tenga Togllge con unos de los Widgets -->
+                <!-- <field name="is_instructor" widget="boolean_toggle" /> -->
+            <!-- </field> -->
+
+            <!-- Otra forma de ubicar el nuevo campo
+            
+            1 forma
+                //definesetiqueta@atributo='nombre de atributo'
+            <xpath expr="//div[@class='o_address_format']" position="before">
+
+            2 forma
+             -->
+
+
+            <xpath expr="//span[@name='address_name']" position="before">
+                <!-- especificar el campo a ubicar -->
+                <field name="is_instructor"/>
+            </xpath>
+            <!-- Si hay varias etiquetas como notebook accedemos por l aposicion. en este caso las XML empieza en 1 -->
+            <xpath expr="//notebook" position="inside">
+                <page name="open_academy" string="Open Academy">
+                    <label for="is_instructor" string="Es Instructor?"/>
+                    <field name="is_instructor" widget="boolean_toggle"/>    
+                </page>
+                
+            </xpath>
+
+        </field>
+    </record>
+
+    <!--Accion de Ventana-->
+    <record id="instructor_action" model="ir.actions.act_window">
+        <field name="name">Instructor</field>        <!--Encabezado de la Vista-->
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>        <!--Las vistas que van a estar disponibles-->
+    </record>
+
+    <menuitem id="instructor_menu" name="Instructor" action="instructor_action" parent="open_academy_root_menu" sequence="12"/>
+</odoo>

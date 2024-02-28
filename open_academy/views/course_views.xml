@@ -1,19 +1,42 @@
 <odoo>
-    <record id="course_form_view" model="ir.ui.view"><!--formulario-->
-        <field name="name">course.form.view</field>
+    <!-- ir.ui.view => es el modelo de las Vistas -->
+    <!-- view_course_form =>  -->
+    <!--
+        Vistas:
+        Formulario
+        Lista
+        Busqueda o Filtros: Search
+        Tablas dinamicas: pivot
+        Tarjetas: kanban o de Trajetas, con Icono, button, menu contextual que corresponde aun oir.module.module
+        Calendario:
+
+
+
+        Las vistas se declaran en __manifiest_.py
+    -->
+    <!--Cabecera-->
+    <record id="view_course_form" model="ir.ui.view">
+        <field name="name">view.course.form</field>
+        <!--A que modelo HACE REFERENCIA-->
         <field name="model">course</field>
+        <!--Para definir que es una Formulario-->
         <field name="arch" type="xml">
             <form>
+                <!--Sheet para Agrupar en Group como Col. Maximo hasta 2 group por que con 3 -->
                 <sheet>
-                    <div class='oe_title mb24'>
+                    <label for="name" string="Nombre del Curso"/>
+                    <div class="oe_title">
                         <h1>
-                            <field name="name" default_focus="1" placeholder="Course name"/>
+                            <field name="name" default_focus="1" class="text-break" placeholder="Nombre del Curso"/>
                         </h1>
                     </div>
                     <group>
-                        <group>    
+                        <group>
                             <field name="description"/>
-                            <field name="responsible_id"/>            
+                        </group>
+
+                        <group>
+                            <field name="responsible_id"/>
                         </group>
                     </group>
                 </sheet>
@@ -21,34 +44,60 @@
         </field>
     </record>
 
-    <record id="course_view_search" model="ir.ui.view">
-        <field name="name">course.view.search</field>
+    <!--Lista-->
+    <record id="view_course_tree" model="ir.ui.view">
+        <field name="name">view.course.tree</field>
+        <!--A que modelo HACE REFERENCIA-->
         <field name="model">course</field>
+        <!--Para definir que es una Formulario-->
         <field name="arch" type="xml">
-            <search string="course">
-                <field name="name" />
-                <field name="responsible_id" />
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="responsible_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Vista Search-->
+    <record id="view_course_search" model="ir.ui.view">
+        <field name="name">view.course.search</field>
+        <!--A que modelo HACE REFERENCIA-->
+        <field name="model">course</field>
+        <!--Para definir que es una Formulario-->
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="responsible_id"/>
             </search>
         </field>
     </record>
 
-    <record id="action_show_course" model="ir.actions.act_window"><!--acción de ventana wi-->
-        <field name="name">Courses</field>
-        <field name="type">ir.actions.act_window</field>
+
+    <!--Acccion de ventana Para que el usurio pueda ver
+    
+    Siempre para crear una Vista hay 3 pasos necesarios:
+        1. Crear las vistas form, tree, search
+        2. Crear accion de Ventana (Evento que llamara a las Vistas)
+        3. Crear un menu (Este llama a una accion)
+
+    -->
+
+    <!--Accion de Ventana-->
+    <record id="course_action" model="ir.actions.act_window">
+        <field name="name">Course</field>        <!--Encabezado de la Vista-->
         <field name="res_model">course</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form</field>        <!--Las vistas que van a estar disponibles-->
     </record>
-        <!-- show ventana-->
-    <menuitem 
-        id="open_academy_main_menu"
-        name="Open Academy"
-        sequence="99"/> 
 
-    <menuitem
-        action="action_show_course"
-        id="menu_courses"
-        parent="open_academy_main_menu"
-        name="Courses"
-        sequence="1"/>
+    <!--Crear un Menu Primario-->
+    <menuitem id="open_academy_root_menu" name="Open Academy" sequence="50"/>
 
+    <!--
+        action: LLAMA A LA ACCION course_action creado ARRBIA
+        parent: es el padre de Curso. open_academy_root_menu 
+
+        -->
+    <menuitem id="course_menu" name="Course" action="course_action" parent="open_academy_root_menu" sequence="10"/>
 </odoo>

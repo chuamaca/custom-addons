@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 edificiope.access_cuota,access_cuota,edificiope.model_cuota,base.group_user,1,1,1,1
+edificiope.access_scheduledfee,access_scheduledfee,edificiope.model_scheduledfee,base.group_user,1,1,1,1

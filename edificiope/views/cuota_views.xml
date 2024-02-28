@@ -14,9 +14,10 @@
                     </div>
                     <group>
                         <group>    
-                            <field name="partnerbuilding_id"/>
+                            <field name="partnerbuilding_id" filter_domain="[('is_company','=',False)]" />
                             <field name="date_start"/>    
-                             <field name="amount"/>            
+                             <field name="amount"/>   
+                            <field name="scheduledfee_id"/>
                         </group>
                     </group>
                 </sheet>
@@ -35,6 +36,7 @@
                 <field name="partnerbuilding_id"/>
                 <field name="date_start" />
                 <field name="amount"/>
+                <field name="scheduledfee_id"/>
             </tree>
         </field>
     </record>

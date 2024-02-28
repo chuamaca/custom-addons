@@ -1,3 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-admin_course_access,admin_course_access,model_course,base.group_system,1,1,1,1
-open_academy.access_session,access_session,open_academy.model_session,base.group_user,1,1,1,1
+user_access_course,access.course user,model_course,,1,1,1,1
+user_access_session,access.session user,model_session,,1,1,1,1

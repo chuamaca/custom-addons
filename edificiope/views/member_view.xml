@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_res_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+        
+        
+         <xpath expr="//span[@name='address_name']" position="before">
+              
+                <field name="is_member"/>
+        </xpath>
+
+        <!-- oculatamos de la Vista a is_instructor -->
+        <xpath expr="//field[@name='is_instructor']" position="attributes">
+            <attribute name="invisible">1</attribute>
+        </xpath>
+ <!-- <xpath expr="//field[@id='company']" position="attributes">
+            <attribute name="invisible">1</attribute>
+        </xpath> -->
+        <!-- <xpath expr="//field[@name='company_type']" position="attributes">
+            <attribute name="invisible">1</attribute>
+        </xpath> -->
+
+       
+
+        </field>
+    </record>
+
+
+   <record id="member_action" model="ir.actions.act_window">
+        <field name="name">Socio</field>        <!--Encabezado de la Vista-->
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>        <!--Las vistas que van a estar disponibles-->
+        <field name="domain">[('is_company','=',False)]</field> 
+    </record>
+
+    <menuitem id="member_menu" name="Socio" action="member_action" parent="edificiope_main_menu" sequence="13"/>
+
+</odoo>
