@@ -8,6 +8,7 @@ class ScheduledFee(models.Model):
     month = fields.Char(string='Mont', required=True)
     year = fields.Char(string='Year', required=True)
     date_start = fields.Datetime(string='Date start', required=True)
+    date_end = fields.Datetime(string='Date End', required=True)
 
     def setDefaultName(selft):
         return month  + year
