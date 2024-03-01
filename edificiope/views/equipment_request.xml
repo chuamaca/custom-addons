@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_equipment_request_form_inherit" model="ir.ui.view">
+        <field name="name">equipment.request.form.inherit</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='priority']" position="before">
+                    <field name="amount"/>
+            </xpath>
+        </field>
+    </record>
+   <record id="maintenance_request_cost_action" model="ir.actions.act_window">
+        <field name="name">Mantenimiento</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="maintenance_menu" name="Mantenimiento" action="maintenance_request_cost_action" parent="edificiope_main_menu" sequence="18"/>
+</odoo>

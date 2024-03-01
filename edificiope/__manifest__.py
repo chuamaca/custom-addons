@@ -14,7 +14,8 @@
     'data': [
         # Aqui van las rutas de las vistas del modulo
         "views/cuota_views.xml",
-          "views/member_view.xml",
+        "views/member_view.xml",
+          "views/equipment_request.xml",
         #"views/session_views.xml",
         #"views/res_partner_views.xml",
         "security/ir.model.access.csv",
