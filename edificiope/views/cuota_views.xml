@@ -9,15 +9,24 @@
                 <sheet>
                     <div class='oe_title mb24'>
                         <h1>
-                            <field name="name" default_focus="1" placeholder="Numero Couta"/>
+                            <field name="name" default_focus="1" placeholder="New"/>
                         </h1>
                     </div>
                     <group>
                         <group>    
-                            <field name="partnerbuilding_id" filter_domain="[('is_company','=',False)]" />
-                            <field name="date_start"/>       
-                             <field name="amount"/>   
+                            <field name="partnerbuilding_id" domain="[('is_member','=',True),('is_company','=',False)]"/>
+                            
+                              <field name="department"/>
                             <field name="scheduledfee_id"/>
+                            <field name="paymentdate"/>       
+                             <field name="amountpaid"/>   
+                              <field name="pendingamount"/> 
+                            
+                        </group>
+                    </group>
+                    <group>
+                        <group>    
+                            <field name="observation"/>
                         </group>
                     </group>
                 </sheet>
@@ -32,11 +41,15 @@
         <!--Para definir que es una Formulario-->
         <field name="arch" type="xml">
             <tree>
-                <field name="name"/>
                 <field name="partnerbuilding_id"/>
-                <field name="date_start" />
-                <field name="amount"/>
+                <field name="department"/>
+                <field name="name"/>
                 <field name="scheduledfee_id"/>
+                <field name="totalamount"/>
+                <field name="pendingamount"/>
+                <field name="amountpaid"/>
+                <field name="paymentdate"/>
+                <field name="observation"/>
             </tree>
         </field>
     </record>
@@ -48,9 +61,22 @@
             <search string="Cuotas">
                 <field name="name" />
                 <field name="partnerbuilding_id" />
+                <field name="scheduledfee_id"/>
             </search>
         </field>
     </record>
+
+<!-- 
+    Secuencia
+    <record id="secuence_numerorecibo" model="ir.sequence">
+        <field name="name">Secuencia De Recibo</field>
+        <field name="code">recibocuota</field>
+        <field name="active">True</field>
+        <field name="prefix">E02-</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record> -->
     
      <record id="action_show_cuota" model="ir.actions.act_window"><!--acción de ventana wi-->
         <field name="name">Cuotas</field>

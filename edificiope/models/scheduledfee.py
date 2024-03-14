@@ -5,8 +5,9 @@ class ScheduledFee(models.Model):
     _description = 'scheduledfee'
 
     name =fields.Char(string='Cuota', required=True  )
-    month = fields.Char(string='Mont', required=True)
+    month = fields.Char(string='Month', required=True)
     year = fields.Char(string='Year', required=True)
+    amount =fields.Float(digits=(2, 2), string='Monto')
     date_start = fields.Datetime(string='Date start', required=True)
     date_end = fields.Datetime(string='Date End', required=True)
 
